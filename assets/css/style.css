@@ -140,6 +140,7 @@ body {
 .btn--blue:active, .btn--blue:hover {
     background-color: darkblue;
     color: white;
+    cursor: pointer;
 }
 
 .btn--orange {
@@ -149,6 +150,7 @@ body {
 .btn--orange:active, .btn--orange:hover {
     background-color: darkorange;
     color: white;
+    cursor: pointer;
 }
 
 .btn--red {
@@ -158,6 +160,7 @@ body {
 .btn--red:active, .btn--red:hover {
     background-color: darkred;
     color: white;
+    cursor: pointer;
 }
 
 .btn--green {
@@ -167,6 +170,7 @@ body {
 .btn--green:active, .btn--green:hover {
     background-color: darkgreen;
     color: white;
+    cursor: pointer;
 }
 
 .btn--gray {
