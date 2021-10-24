@@ -1,3 +1,6 @@
+// Wait for the DOM to finish loading before running the game.
+// Get the button elements and add event listeners to them.
+
 document.addEventListener("DOMContentLoaded", function () {
     let buttons = document.getElementsByTagName("button");
 
@@ -5,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         button.addEventListener("click", function () {
             if (this.getAttribute("data-type") === "submit") {
+                checkAnswer();
             }
             else {
                 let gameType = this.getAttribute("data-type");
@@ -28,18 +32,50 @@ function runGame(gameType) {
 
     if (gameType === "addition") {
         displayAdditionQuestion(num1, num2);
-    } else {
+    }
+    else {
         console.log(`Unkown game type: ${gameType}`);
         throw `Unkown game type: ${gameType}. Aborting!`;
     }
 }
 
+/**
+ * Check the answer against the first element in
+ * the returned calculateCorrectAnswer array
+ */
 function checkAnswer() {
 
+    let userAnswer = parseInt(document.getElementById('answer-box').value);
+    let calculatedAnswer = calculateCorrectAnswer();
+    let isCorrect = userAnswer === calculatedAnswer[0];
+
+    if (!isCorrect) {
+        alert(`Awww... you answered ${userAnswer}. The correct answer was ${calculatedAnswer[0]}.`);
+    }
+    else {
+        alert("Hey!! You nailed it!! =D");
+    }
 }
 
+/**
+ * Gets the operands (the numbers) and the operator (plus, minus etc)
+ * directly from the DOM, and returns the correct answer.
+ */
 function calculateCorrectAnswer() {
 
+    let operand1 = parseInt(document.getElementById('operand1').innerText);
+    let operand2 = parseInt(document.getElementById('operand2').innerText);
+    let operator = document.getElementById('operator').innerText;
+
+    if (operator === '+') {
+        return [
+            operand1 + operand2, "addition"
+        ];
+    }
+    else {
+        console.log(`Unimplemented operator: ${operator}`);
+        throw `Unimplemented operator: ${operator}. Aborting!`;
+    }
 }
 
 function incrementScore() {
