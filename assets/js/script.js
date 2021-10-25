@@ -4,7 +4,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     let buttons = document.getElementsByTagName("button");
 
-    for (button of buttons) {
+    for (let button of buttons) {
 
         button.addEventListener("click", function () {
             if (this.getAttribute("data-type") === "submit") {
@@ -16,6 +16,15 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
+
+    document.getElementById("answer-box").addEventListener('keydown', function (event) {
+
+        if (event.key === 'Enter') {
+            checkAnswer();
+        }
+    });
+
+    runGame('addition');
 });
 
 /**
@@ -24,6 +33,11 @@ document.addEventListener("DOMContentLoaded", function () {
  */
 function runGame(gameType) {
 
+    document.getElementById("answer-box").value = "";
+    document.getElementById("answer-box").focus();
+
+
+    // Creates two random numbers between 1 and 25
     let num1 = Math.floor(Math.random() * 25) + 1;
     let num2 = Math.floor(Math.random() * 25) + 1;
 
@@ -47,7 +61,7 @@ function runGame(gameType) {
 
         default:
             console.log(`Unkown game type: ${gameType}`);
-            break;
+            throw `Unkown game type: ${gameType}`;
     }
 }
 
@@ -69,6 +83,8 @@ function checkAnswer() {
         alert("Hey!! You nailed it!! =D");
         incrementScore();
     }
+
+    runGame(calculatedAnswer[1])
 }
 
 /**
@@ -140,13 +156,5 @@ function displayMultiplyQuestion(operand1, operand2) {
     document.getElementById('operand1').textContent = operand1;
     document.getElementById('operand2').textContent = operand2;
     document.getElementById('operator').textContent = "x";
-
-}
-
-function displayDivisionQuestion(operand1, operand2) {
-
-    document.getElementById('operand1').textContent = operand1;
-    document.getElementById('operand2').textContent = operand2;
-    document.getElementById('operator').textContent = "÷";
 
 }
